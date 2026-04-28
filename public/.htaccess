@@ -1,0 +1,6 @@
+RewriteEngine On
+# Ak súbor alebo priečinok neexistuje...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...pošli všetko do index.php
+RewriteRule ^ index.php [L]

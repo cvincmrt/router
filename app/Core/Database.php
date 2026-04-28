@@ -21,7 +21,7 @@ class Database
         }
 
         $dns = "mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset";
-
+        
         try{
             $this->conn = new PDO($dns,$this->user,$this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
