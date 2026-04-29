@@ -14,17 +14,19 @@ class Database
     private string $charset = "utf8mb4";
     private ?PDO $conn = null;
 
-    public function getConnect() :?PDO
+    public function getConnection() :?PDO
     {
         if($this->conn !== null){
             return $this->conn;
         }
 
-        $dns = "mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset";
-        
+        $dsn = "mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset";
+
         try{
-            $this->conn = new PDO($dns,$this->user,$this->password);
+            $this->conn = new PDO($dsn,$this->user,$this->password);
+            
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         }
         catch(PDOException $e){
            die("Connection error:".$e->getMessage());

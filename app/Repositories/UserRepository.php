@@ -13,5 +13,8 @@ class UserRepository
         $this->db = $pdo;
     }
 
-    
+    public function findByUsername()
+    {
+
+    }
 }

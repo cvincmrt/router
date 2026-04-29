@@ -1,26 +1,17 @@
 <?php
 
-session_start();
-
 require_once __DIR__. "/../vendor/autoload.php";
+
+session_start();
 
 use App\Core\Database;
 use App\Repositories\UserRepository;
-use App\Controllers\AuthControllers;
-use App\Core\Router;
+
 
 $db = new Database();
 
-$pdo = $db->getConnect();
+$pdo = $db->getConnection();
+
+var_dump($pdo);
 
 $userRepo = new UserRepository($pdo);
-
-$authController = new AuthControllers($userRepo);
-
-$router = new Router();
-$router->add("/login", $authController, "login");
-
-
-$router->resolve();
-
-
