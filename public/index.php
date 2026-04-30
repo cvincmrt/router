@@ -12,6 +12,6 @@ $db = new Database();
 
 $pdo = $db->getConnection();
 
-var_dump($pdo);
-
 $userRepo = new UserRepository($pdo);
+
+var_dump($userRepo->findByUsername("miro"));
