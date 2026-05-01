@@ -79,8 +79,18 @@ class UserRepository
         }
     }
 
-    public function delete(User $user) 
+    public function delete(int $id) :bool 
     {
-        
+        try{
+            $sql = "DELETE FROM users WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+
+            return $stmt->execute([
+                ":id" => $id
+            ]);
+
+        }catch(PDOException $e){
+            return false;
+        }
     }
 }
