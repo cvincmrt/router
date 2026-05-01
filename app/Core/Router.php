@@ -10,7 +10,7 @@ class Router
     /**
      * @param string $path - URL adresa("/login")
      * @param object $controllerObject
-     * @param string $metoda $method - nazov metody ktora sa spusti
+     * @param string $method - nazov metody ktora sa spusti
      */
 
     public function add(string $path, object $controllerObject, string $method) :void
