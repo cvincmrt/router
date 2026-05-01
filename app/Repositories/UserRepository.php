@@ -39,4 +39,48 @@ class UserRepository
             return null;
         }       
     }
+
+    public function save(User $user) :bool
+    {
+        try{
+            $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
+            $stmt = $this->db->prepare($sql);
+
+            $result =  $stmt->execute([
+                ":username" => $user->getUsername(),
+                ":password" => $user->getPassword(),
+                ":role" => $user->getRole()
+            ]);
+
+            if($result){
+                $user->setId((int)$this->db->lastInsertId());
+            }
+            return $result;
+        }catch(PDOException $e){
+            return false;
+        }
+    }
+
+    public function update(User $user) :bool
+    {
+        try{
+            $sql = "UPDATE users SET username = :username, password = :password, role = :role WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+
+            return $stmt->execute([
+                ":username" => $user->getUsername(),
+                ":password" => $user->getPassword(),
+                ":role" => $user->getRole(),
+                ":id" => $user->getId()
+            ]);
+
+        }catch(PDOException $e){
+            return false;
+        }
+    }
+
+    public function delete(User $user) 
+    {
+        
+    }
 }
