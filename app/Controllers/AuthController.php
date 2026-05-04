@@ -14,20 +14,29 @@ class AuthController
         $this->userRepo = $userRepo;
     }
 
-    public function login(string $username, string $password) :string
+    public function login()
     {
-        $user = $this->userRepo->findByUsername($username);
+        /*if($_SERVER["REQUEST_METHOD"] === "POST"){
+            $username = $_POST["username"] ?? "";
+            $password = $_POST["password"] ?? "";
 
-        if(!$user || !$user->passwordVerify($password)){
-           return "Nespravne meno alebo heslo"; 
-        }
+            $user = $this->userRepo->findByUsername($username);
 
-        $_SESSION["user_id"] = $user->getId();
-        $_SESSION["username"] = $user->getUsername();
+            if(!$user || !$user->passwordVerify($password)){
+                $error = "Nespravne meno alebo heslo";
+                include "views/login.php";     
+                return $error; 
+            }
 
-        return "Uspesne prihlaseny! Vitaj, ".$user->getUsername();
+            $_SESSION["user_id"] = $user->getId();
+            $_SESSION["username"] = $user->getUsername();
 
-    }
+            header("Location:/views/dashboard");
+            exit();      
+        }*/
+
+        include "views/login.php";
+    }    
 
     public function logout() :void
     {

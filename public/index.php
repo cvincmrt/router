@@ -18,6 +18,7 @@ $pdo = $db->getConnection();
 $userRepo = new UserRepository($pdo);
 
 $authController = new AuthController($userRepo);
+var_dump($_SERVER["REQUEST_URI"]);
 
 $router = new Router();
 
