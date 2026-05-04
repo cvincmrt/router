@@ -16,32 +16,33 @@ class AuthController
 
     public function login()
     {
-        /*if($_SERVER["REQUEST_METHOD"] === "POST"){
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
             $username = $_POST["username"] ?? "";
             $password = $_POST["password"] ?? "";
 
             $user = $this->userRepo->findByUsername($username);
 
             if(!$user || !$user->passwordVerify($password)){
-                $error = "Nespravne meno alebo heslo";
-                include "views/login.php";     
-                return $error; 
+                $_SESSION["flash_error"] = "Nespravne meno alebo heslo";
+                
+                header("Location:/router/public/login");
+                exit();
             }
 
             $_SESSION["user_id"] = $user->getId();
             $_SESSION["username"] = $user->getUsername();
 
-            header("Location:/views/dashboard");
+            header("Location:/router/public/dashboard");
             exit();      
-        }*/
+        }
 
-        include "views/login.php";
+        include __DIR__ . "/../../views/login.php";
     }    
 
     public function logout() :void
     {
         session_destroy();
-        header("Location:login.php");
+        header("Location:/router/public/login");
         exit();
     }
 
@@ -60,5 +61,16 @@ class AuthController
         }
 
         return "Nastala chyba pri registracii!!!";
+    }
+
+    public function dashboard()
+    {
+        if(!isset($_SESSION["user_id"])){
+             $_SESSION["flash_error"] = "Musis sa najskor prihlasit";
+            header("Location:/router/public/login");
+            exit();
+        }
+        
+        include __DIR__ . "/../../views/dashboard.php";
     }
 }

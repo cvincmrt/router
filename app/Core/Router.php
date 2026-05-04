@@ -30,11 +30,16 @@ class Router
         // musime ocistit adresu keby tam bol query string napr: router/public/kontakt?name=120. To co je od ? je nepotrebne
         $path = parse_url($requestUri,PHP_URL_PATH);
 
-        if(isset($this->routes["path"])){
+        //teraz mam adresu router/public/kontakt, ale potrebujem iba /kontakt(/login)
+        $basePath = '/router/public';
+        $path = str_replace($basePath, '', $path);
 
-            $route = $this->routes["path"];
+        if(isset($this->routes[$path])){
+
+            $route = $this->routes[$path];
             $controller = $route["controller"];
             $method = $route["method"];
+
 
             // je to iste ako $authoController->login();
             $controller->$method();
