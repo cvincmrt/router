@@ -17,8 +17,8 @@ class AuthController
     public function login()
     {
         if($_SERVER["REQUEST_METHOD"] === "POST"){
-            $username = $_POST["username"] ?? "";
-            $password = $_POST["password"] ?? "";
+            $username = trim($_POST["username"] ?? "");
+            $password = trim($_POST["password"] ?? "");
 
             $user = $this->userRepo->findByUsername($username);
 
@@ -46,21 +46,29 @@ class AuthController
         exit();
     }
 
-    public function register(string $username, string $password) :string
+    public function register()
     {
-        if($this->userRepo->findByUsername($username)){
-            return "Chyba: Uzivatel s danym menom uz existuje";
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
+            $username = trim($_POST["username"] ?? "");
+            $password = trim($_POST["password"] ?? "");
+
+            if($this->userRepo->findByUsername($username)){
+                $_SESSION["flash_error"] = "Uzivatelske meno uz existuje";
+                header("Location:/router/public/register");
+                exit();
+            }
+
+            $newUser = new User(username:$username, password:$password, isAlreadyHashed:false);
+
+            if($this->userRepo->save($newUser)){
+                $_SESSION["flash_success"] = "Registracia prebehla uspesne mozes sa prihlasit :-)";
+                header("Location:/router/public/login");
+                exit();
+            }
+
         }
 
-        $newUser = new User(username:$username, password:$password, isAlreadyHashed:false);
-
-        if($this->userRepo->save($newUser)){
-            $_SESSION["flash_success"] = "Registracia prebehla uspesne";
-            header("Location:login.php");
-            exit();
-        }
-
-        return "Nastala chyba pri registracii!!!";
+        include __DIR__ ."/../../views/register.php";
     }
 
     public function dashboard()
