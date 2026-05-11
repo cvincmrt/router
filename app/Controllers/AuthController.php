@@ -42,7 +42,7 @@ class AuthController
     public function logout() :void
     {
         session_destroy();
-        header("Location:/router/public/login");
+        header("Location:/router/public/");
         exit();
     }
 
@@ -54,6 +54,12 @@ class AuthController
 
             if($this->userRepo->findByUsername($username)){
                 $_SESSION["flash_error"] = "Uzivatelske meno uz existuje";
+                header("Location:/router/public/register");
+                exit();
+            }
+
+            if(mb_strlen($username) < 3 || mb_strlen($password) < 6){
+                $_SESSION["flash_error"] = "Uzivatelske meno musi mat aspon 3 znaky a heslo 6 znakov";
                 header("Location:/router/public/register");
                 exit();
             }

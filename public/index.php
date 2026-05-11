@@ -1,4 +1,6 @@
 <?php
+
+use App\Controllers\HomeController;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -22,10 +24,12 @@ $pdo = $db->getConnection();
 $userRepo = new UserRepository($pdo);
 
 $authController = new AuthController($userRepo);
+$homeController = new HomeController();
 
 
 $router = new Router();
 
+$router->add("/", $homeController, "index");
 $router->add("/login", $authController, "login");
 $router->add("/register", $authController, "register");
 $router->add("/dashboard", $authController, "dashboard");
