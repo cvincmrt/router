@@ -6,15 +6,9 @@ use PDO;
 use PDOException;
 use App\Models\User;
 
-class UserRepository
+class UserRepository extends BaseRepository
 {
-    private PDO $db;
-
-    public function __construct(PDO $pdo)
-    {
-        $this->db = $pdo;
-    }
-
+  
     public function findByUsername(string $username) :?User
     {
         try{

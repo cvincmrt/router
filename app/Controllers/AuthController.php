@@ -31,8 +31,14 @@ class AuthController
 
             $_SESSION["user_id"] = $user->getId();
             $_SESSION["username"] = $user->getUsername();
+            $_SESSION["role"] = $user->getRole();
+            
 
-            header("Location:/router/public/dashboard");
+            if($user->getRole() === "admin"){
+                header("Location:/router/public/admin");
+            }else{
+                header("Location:/router/public/dashboard");
+            }        
             exit();      
         }
 
