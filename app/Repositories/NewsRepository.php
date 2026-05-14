@@ -31,4 +31,29 @@ class NewsRepository extends BaseRepository
             return false;
         }
     } 
+
+    public function getAll() :?array
+    {
+        try{
+            $news = [];    
+            $sql = "SELECT * FROM news";
+
+            $stmt = $this->db->query($sql);
+
+            while($row = $stmt->fetch()){
+                $novelty = null;
+
+                $novelty = new News($row["title"], $row["content"], $row["image_path"]);
+                $novelty->setId((int)$row["id"]);
+                $novelty->setCreatedAt($row["created_at"]);
+
+                $news[] = $novelty;
+            }
+            return $news;
+        }
+        catch(PDOException $e){
+            return null;
+        }
+
+    }
 }

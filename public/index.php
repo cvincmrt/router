@@ -44,6 +44,8 @@ $router->add("/register", $authController, "register");
 $router->add("/dashboard", $authController, "dashboard");
 $router->add("/logout", $authController, "logout");
 $router->add("/admin", $adminController, "adminDashboard");
+$router->add("/admin/news", $newsController, "adminIndex");
+
 
 $router->resolve();
 

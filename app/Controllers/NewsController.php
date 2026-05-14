@@ -32,4 +32,16 @@ class NewsController
 
         include __DIR__ . "/../../views/addnews.php";*/
     }
+
+    public function adminIndex()
+    {
+        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+            header("Location:/router/public/login");
+            exit();
+        }
+        
+        $newsList = $this->newsRepo->getAll();
+        
+        include __DIR__ . "/../../views/admin/news_list.php";
+    }
 }
