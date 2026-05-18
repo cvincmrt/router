@@ -42,6 +42,8 @@ $router->add("/logout", $authController, "logout");
 $router->add("/admin", $adminController, "adminDashboard");
 $router->add("/admin/news", $newsController, "adminIndex");
 $router->add("/admin/news/create", $newsController, "create");
+$router->add("/admin/news/delete", $newsController, "delete");
+$router->add("/admin/news/edit", $newsController, "edit");
 
 
 $router->resolve();

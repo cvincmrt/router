@@ -29,6 +29,7 @@
                     <th scope="col">Content</th>
                     <th scope="col">Image_path</th>
                     <th scope="col">Created_at</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,23 @@
                             <td><?= $novelty->getContent(); ?></td>
                             <td><?= $novelty->getImagePath(); ?></td>
                             <td><?= $novelty->getCreatedAt(); ?></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <form action = "/router/public/admin/news/delete" method = "POST">
+                                            <input type="hidden" name="id" value="<?= $novelty->getId(); ?>">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-auto">
+                                        <form action = "/router/public/admin/news/edit" method = "GET">
+                                            <input type="hidden" name="id" value="<?= $novelty->getId(); ?>">
+                                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>                   
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?> 

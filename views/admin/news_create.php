@@ -19,8 +19,8 @@
                 <textarea class="form-control" placeholder="Content" id="content" name="content"></textarea>
             </div>
             <div class="mb-5">
-                <label for="newFile" class="form-label">Picture</label>
-                <input type="file" class="form-control" id="newFile" name="newFile">
+                <label for="image" class="form-label">Picture</label>
+                <input type="file" class="form-control" id="image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Save novelty</button>
         </form>

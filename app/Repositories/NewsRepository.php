@@ -56,4 +56,43 @@ class NewsRepository extends BaseRepository
         }
 
     }
+
+    public function delete(int $id) :bool
+    {
+        try{
+            $sql = "DELETE FROM news WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+
+            return $stmt->execute([
+                ":id" => $id
+            ]);
+        }
+        catch(PDOException $e){
+            return false;
+        }
+    }
+
+    public function getById(int $id) :?News
+    {
+        try{
+            $sql = "SELECT * FROM news WHERE id = :id LIMIT 1";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([":id" => $id]);
+
+            $row = $stmt->fetch();
+
+            if(!$row){
+                return null;
+            }    
+            
+            $novelty = new News($row["title"], $row["content"], $row["image_path"]);
+            $novelty->setCreatedAt($row["created_at"]);
+            $novelty->setId((int)$row["id"]);
+            return $novelty;           
+        }
+        catch(PDOException $e){
+            return null;
+        }
+    }
 }
