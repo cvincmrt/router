@@ -9,6 +9,19 @@
 <body>
     <div class="container my-3">
         <h2 class="mb-3">News list</h2>
+
+        <?php if(isset($_SESSION["flash_success"])) :?>
+            <div class="alert alert-success" role="alert">
+                <?= $_SESSION["flash_success"]; ?>
+            </div>
+        <?php endif; ?>
+
+         <?php if(isset($_SESSION["flash_error"])) :?>
+            <div class="alert alert-danger" role="alert">
+                <?= $_SESSION["flash_error"]; ?>
+            </div>
+        <?php endif; ?>
+        
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
