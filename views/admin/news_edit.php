@@ -17,19 +17,19 @@
                     
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="<?= $novelty->getTitle(); ?>">
+                        <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($novelty->getTitle()); ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" placeholder="Content" id="content" name="content"><?= $novelty->getContent(); ?></textarea>
+                        <textarea class="form-control" placeholder="Content" id="content" name="content"><?= htmlspecialchars($novelty->getContent()); ?></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Current picture</label>
                         
                         <?php if ($novelty->getImagePath()): ?>
-                            <img src="/router/public<?= $novelty->getImagePath(); ?>" alt="Current image"  style="max-width: 100px; display: block;">
+                            <img src="/router/public<?= htmlspecialchars($novelty->getImagePath()); ?>" alt="Current image"  style="max-width: 100px; display: block;">
                         <?php else: ?>
                             <p class="text-muted small">No image uploaded yet.</p>
                         <?php endif; ?>
@@ -37,11 +37,12 @@
 
                     <div class="mb-5">
                         <label for="image" class="form-label">Upload New Picture</label>
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save novelty</button>               
+                    <button type="submit" class="btn btn-primary">Save change</button> 
+                    <a href="/router/public/admin/news" class="btn btn-secondary">Cancel</a>              
             </form>
-            <a href="/router/public/admin/news">Cancel</a>
+            
         </div>
     <?php endif; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

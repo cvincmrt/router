@@ -12,17 +12,19 @@
 
         <?php if(isset($_SESSION["flash_success"])) :?>
             <div class="alert alert-success" role="alert">
-                <?= $_SESSION["flash_success"]; ?>
+                <?= htmlspecialchars($_SESSION["flash_success"]); ?>
             </div>
+            <?php unset($_SESSION["flash_success"]); ?>
         <?php endif; ?>
 
          <?php if(isset($_SESSION["flash_error"])) :?>
             <div class="alert alert-danger" role="alert">
-                <?= $_SESSION["flash_error"]; ?>
+                <?= htmlspecialchars($_SESSION["flash_error"]); ?>
             </div>
+            <?php unset($_SESSION["flash_error"]); ?>
         <?php endif; ?>
         
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
@@ -33,17 +35,23 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if(isset($newsList)) :?>
+                <?php if(isset($newsList) && !empty($newsList)) :?>
                     <?php foreach($newsList as $novelty) :?>
                         <tr>
-                            <td><?= $novelty->getTitle(); ?></td>
-                            <td><?= $novelty->getContent(); ?></td>
-                            <td><?= $novelty->getImagePath(); ?></td>
-                            <td><?= $novelty->getCreatedAt(); ?></td>
+                            <td><?= htmlspecialchars($novelty->getTitle()); ?></td>
+                            <td><?= htmlspecialchars($novelty->getContent()); ?></td>
+                            <td>
+                                <?php if($novelty->getImagePath()): ?>
+                                    <img src="/router/public<?= htmlspecialchars($novelty->getImagePath()); ?>" class="img-thumbnail" alt="calculator" style="max-width:60px;">
+                                <?php else: ?>
+                                    <span class="text-muted small">No image</span>    
+                                <?php endif; ?>
+                            </td>
+                            <td><?= htmlspecialchars($novelty->getCreatedAt()); ?></td>
                             <td>
                                 <div class="row">
                                     <div class="col-auto">
-                                        <form action = "/router/public/admin/news/delete" method = "POST">
+                                        <form action = "/router/public/admin/news/delete" method = "POST" onsubmit="return confirm('Are you sure you want to delete this novelty?');">
                                             <input type="hidden" name="id" value="<?= $novelty->getId(); ?>">
                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                         </form>
@@ -59,6 +67,8 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
+                <?php else: ?>
+                        
                 <?php endif; ?> 
             </tbody>
         </table>

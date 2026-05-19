@@ -84,6 +84,20 @@ class NewsController
                 header("Location:/router/public/admin/news");
                 exit();
             }
+/**************************************** zmazanie obrazka z uploads *********************************/
+            $novelty = $this->newsRepo->getById($id);    
+
+            if($novelty){
+                $imagePath = $novelty->getImagePath();
+
+                if(!empty($imagePath)){
+                    $fullPath = __DIR__ . "/../../public".$imagePath;
+
+                    if(file_exists($fullPath)){
+                        unlink($fullPath);
+                    }
+                }
+            }
 
             $result = $this->newsRepo->delete(($id));
                 
