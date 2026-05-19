@@ -95,4 +95,21 @@ class NewsRepository extends BaseRepository
             return null;
         }
     }
+
+    public function update(News $novelty) :bool
+    {
+        try{
+            $sql = "UPDATE news SET title = :title, content = :content, image_path = :image_path";
+            $stmt = $this->db->prepare($sql);     
+        
+            return $stmt->execute([
+                ":title" => $novelty->getTitle(),
+                ":content" => $novelty->getContent(),
+                ":image_path" => $novelty->getImagePath()
+            ]);
+        }
+        catch(PDOException $e){
+            return false;
+        }
+    }
 }

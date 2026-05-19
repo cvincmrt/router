@@ -10,12 +10,16 @@
     <?php if(isset($novelty)): ?>
         <div class="container my-3">
             <h2 class="mb-5">Edit novelty</h2>
-            <form action="/router/public/admin/news/create" method="POST" enctype="multipart/form-data">
             
+            <form action="/router/public/admin/news/edit" method="POST" enctype="multipart/form-data">
+                    
+                    <input type="hidden" name="id" value="<?= $novelty->getId(); ?>">
+                    
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title" name="title" value="<?= $novelty->getTitle(); ?>">
                     </div>
+
                     <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
                         <textarea class="form-control" placeholder="Content" id="content" name="content"><?= $novelty->getContent(); ?></textarea>

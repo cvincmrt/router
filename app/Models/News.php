@@ -49,17 +49,27 @@ class News
     }
 
     //****************************************************** setter ***********************************************
-    public function setId(int $id)
+    public function setId(int $id) :void
     {
         $this->id = $id;
     }
 
-    public function setImagePath(string $image_path)
+    public function setContent(string $content) :void
+    {
+        $this->content = $content;
+    }
+
+    public function setTitle(string $title) :void
+    {
+        $this->title = $title;
+    }
+
+    public function setImagePath(string $image_path) :void
     {
         $this->image_path = $image_path;
     }
 
-    public function setCreatedAt(string $created_at)
+    public function setCreatedAt(string $created_at) :void
     {
         $this->created_at = $created_at;
     }
