@@ -27,7 +27,7 @@ $newsRepo = new NewsRepository($pdo);
 
 $authController = new AuthController($userRepo);
 $newsController = new NewsController($newsRepo);
-$homeController = new HomeController();
+$homeController = new HomeController($newsRepo);
 
 $adminController = new AdminController();
 

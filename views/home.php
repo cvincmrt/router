@@ -33,16 +33,24 @@
     <h2 class="text-center mb-4">Aktuálne novinky</h2>
     <div class="row">
         <!-- Tieto karty neskôr nahradíme PHP cyklom (foreach) -->
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Deň otvorených dverí</h5>
-                    <p class="card-text">Príďte sa pozrieť do našich priestorov už 15. mája...</p>
-                    <a href="#" class="btn btn-outline-primary">Viac info</a>
+        <?php if(isset($newsList) && !empty($newsList)): ?>
+            <?php foreach($newsList as $novelty): ?>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="wrapper">
+                            <img src="/router/public<?= $novelty->getImagePath(); ?>" alt="" style="height:80px; width:80px">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $novelty->getTitle(); ?></h5>
+                            <p class="card-text"><?= $novelty->getContent(); ?></p>
+                            <a href="#" class="btn btn-outline-primary">Viac info</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- ... ďalšie karty ... -->
+            <?php endforeach; ?>    
+        <?php else: ?>
+
+        <?php endif; ?>    
     </div>
 </section> 
    
