@@ -35,6 +35,7 @@ $adminController = new AdminController();
 $router = new Router();
 
 $router->add("/", $homeController, "index");
+$router->add("/news/detail", $homeController, "show");
 $router->add("/login", $authController, "login");
 $router->add("/register", $authController, "register");
 $router->add("/dashboard", $authController, "dashboard");

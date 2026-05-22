@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $novelty->getTitle(); ?></h5>
                             <p class="card-text"><?= $novelty->getContent(); ?></p>
-                            <a href="#" class="btn btn-outline-primary">Viac info</a>
+                            <a href="/router/public/news/detail?id=<?= $novelty->getId(); ?>" class="btn btn-outline-primary">Viac info</a>
                         </div>
                     </div>
                 </div>

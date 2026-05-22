@@ -185,4 +185,5 @@ class NewsController
        
         include __DIR__ ."/../../views/admin/news_edit.php";
     }
+
 }
